@@ -7,39 +7,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  # Clone the GitHub repository
+  # Clone the GitHub repository and initialize Terraform, plan, and apply in one script
   - checkout: self
     persistCredentials: true
-  # Install specific version of Terraform
+
   - task: TerraformInstaller@0
     inputs:
-      terraformVersion: '1.5.0'   
-  # # Run AWS CLI commands
-  # - task: AWSCLI@1
-  #   inputs:
-  #     awsCredentials: 'AWSServiceConnection'
-  #     regionName: 'us-east-1'
-  #     awsCommand: 's3'
-  #     awsSubCommand: 'ls'
+      terraformVersion: '1.5.0'
 
-
-  # Navigate to the Terraform directory and initialize Terraform
   - script: |
       git clone https://github.com/Gowtham1906/terraform-infra-deployment.git
       cd terraform-infra-deployment/terraform-s3
       terraform init
-    displayName: 'Clone Git Repository and Terraform Init'
-
-  # Navigate to the Terraform directory and run terraform plan
-  - script: |
-      cd terraform-infra-deployment/terraform-s3
       terraform plan
-    displayName: 'Terraform Plan'
-
-  # Navigate to the Terraform directory and apply Terraform
-  - script: |
-      cd terraform-infra-deployment/terraform-s3
       terraform apply -auto-approve
-    displayName: 'Terraform Apply'
-
-  
+    displayName: 'Clone Git Repo, Terraform Init, Plan, and Apply'
