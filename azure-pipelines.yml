@@ -10,6 +10,15 @@ steps:
   # Clone the GitHub repository
   - checkout: self
     persistCredentials: true
+    
+  # Run AWS CLI commands
+  - task: AWSCLI@1
+    inputs:
+      awsCredentials: 'AWSServiceConnection'
+      regionName: 'us-east-1'
+      awsCommand: 's3'
+      awsSubCommand: 'ls'
+
 
   # Navigate to the Terraform directory and initialize Terraform
   - script: |
@@ -34,11 +43,3 @@ steps:
   - task: TerraformInstaller@0
     inputs:
       terraformVersion: '1.5.0'
-
-  # Run AWS CLI commands
-  - task: AWSCLI@1
-    inputs:
-      awsCredentials: 'AWSServiceConnection'
-      regionName: 'us-east-1'
-      awsCommand: 's3'
-      awsSubCommand: 'ls'
