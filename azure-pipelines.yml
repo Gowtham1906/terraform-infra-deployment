@@ -11,6 +11,7 @@ steps:
   - checkout: self
     persistCredentials: true
 
+  # Navigate to the directory where Terraform configuration files are located
   - script: |
       git clone https://github.com/Gowtham1906/terraform-infra-deployment.git
     displayName: 'Clone Git Repository'
@@ -30,11 +31,14 @@ steps:
       awsCommand: 's3'
       awsSubCommand: 'ls'
 
-  - script: terraform init
+  - script: |
+      terraform init
     displayName: 'Terraform Init'
 
-  - script: terraform plan
+  - script: |
+      terraform plan
     displayName: 'Terraform Plan'
 
-  - script: terraform apply -auto-approve
+  - script: |
+      terraform apply -auto-approve
     displayName: 'Terraform Apply'
