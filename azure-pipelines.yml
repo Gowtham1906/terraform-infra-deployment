@@ -15,7 +15,8 @@ steps:
     inputs:
       awsServiceEndpoint: 'AWS_Service_Connection_Name'  # Use your AWS service connection
       regionName: 'us-east-1'  # Specify your AWS region
-     
+      awsCommand: 's3'  # AWS service, e.g., S3
+      awsSubcommand: 'ls'  # Subcommand for listing S3 buckets
 
   - script: terraform init
     displayName: 'Terraform Init'
