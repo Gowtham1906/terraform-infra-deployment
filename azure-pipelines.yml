@@ -10,7 +10,10 @@ steps:
   # Clone the GitHub repository
   - checkout: self
     persistCredentials: true
-    
+  # Install specific version of Terraform
+  - task: TerraformInstaller@0
+    inputs:
+      terraformVersion: '1.5.0'   
   # Run AWS CLI commands
   - task: AWSCLI@1
     inputs:
@@ -39,7 +42,4 @@ steps:
       terraform apply -auto-approve
     displayName: 'Terraform Apply'
 
-  # Install specific version of Terraform
-  - task: TerraformInstaller@0
-    inputs:
-      terraformVersion: '1.5.0'
+  
