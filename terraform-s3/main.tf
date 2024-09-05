@@ -4,7 +4,6 @@ provider "aws" {
 
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "my-infra-bucket-050924"
-  acl    = "private"
 
   versioning {
     enabled = true
