@@ -10,7 +10,14 @@ steps:
   - task: TerraformInstaller@0
     inputs:
       terraformVersion: '1.5.0'
-
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your commands here
+        
+        echo 'Hello world'
+        aws configure
   - task: AwsCLI@1
     inputs:
       awsServiceEndpoint: 'AWS_Service_Connection'  # Use the service connection name you created
