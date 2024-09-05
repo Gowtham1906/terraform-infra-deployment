@@ -22,3 +22,21 @@ steps:
       terraform plan
       terraform apply -auto-approve
     displayName: 'Clone Git Repo, Terraform Init, Plan, and Apply'
+  
+  # # Send email notification on failure
+  # - task: Email@1
+  #   condition: failed()
+  #   inputs:
+  #     to: 'gowthamsamaraj@gmail.com'
+  #     subject: 'Azure DevOps Pipeline Failed'
+  #     body: 'The pipeline failed during the Terraform deployment.'
+  - task: SendEmail@1
+    inputs:
+      To: 'gowthamsamaraj@gmail.com'
+      From: 'gowthamsamaraj@gamil.com'
+      Subject: 'Failed Pipeline'
+      BodyAsHtml: false
+      AddAttachment: false
+      SmtpServer: 'smtp.gmail.com'
+      SmtpPort: '465'
+
