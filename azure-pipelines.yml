@@ -11,30 +11,34 @@ steps:
   - checkout: self
     persistCredentials: true
 
+  # Navigate to the Terraform directory and initialize Terraform
   - script: |
       git clone https://github.com/Gowtham1906/terraform-infra-deployment.git
-    displayName: 'Clone Git Repository'
+      cd terraform-infra-deployment/terraform-s3
+      terraform init
+    displayName: 'Clone Git Repository and Terraform Init'
 
+  # Navigate to the Terraform directory and run terraform plan
   - script: |
       cd terraform-infra-deployment/terraform-s3
-    displayName: 'Navigate to Terraform Directory'
+      terraform plan
+    displayName: 'Terraform Plan'
 
+  # Navigate to the Terraform directory and apply Terraform
+  - script: |
+      cd terraform-infra-deployment/terraform-s3
+      terraform apply -auto-approve
+    displayName: 'Terraform Apply'
+
+  # Install specific version of Terraform
   - task: TerraformInstaller@0
     inputs:
       terraformVersion: '1.5.0'
 
+  # Run AWS CLI commands
   - task: AWSCLI@1
     inputs:
       awsCredentials: 'AWSServiceConnection'
       regionName: 'us-east-1'
       awsCommand: 's3'
       awsSubCommand: 'ls'
-
-  - script: terraform init
-    displayName: 'Terraform Init'
-
-  - script: terraform plan
-    displayName: 'Terraform Plan'
-
-  - script: terraform apply -auto-approve
-    displayName: 'Terraform Apply'
