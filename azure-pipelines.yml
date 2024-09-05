@@ -7,10 +7,21 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+  # Clone the GitHub repository
+  - checkout: self
+    persistCredentials: true
+
+  - script: |
+      git clone https://github.com/Gowtham1906/terraform-infra-deployment.git
+    displayName: 'Clone Git Repository'
+
+  - script: |
+      cd terraform-infra-deployment/terraform-s3
+    displayName: 'Navigate to Terraform Directory'
+
   - task: TerraformInstaller@0
     inputs:
       terraformVersion: '1.5.0'
-
 
   - task: AWSCLI@1
     inputs:
