@@ -32,13 +32,11 @@ steps:
 
   # Navigate to the Terraform directory and run terraform plan
   - script: |
-      cd terraform-infra-deployment/terraform-s3
       terraform plan
     displayName: 'Terraform Plan'
 
   # Navigate to the Terraform directory and apply Terraform
   - script: |
-      cd terraform-infra-deployment/terraform-s3
       terraform apply -auto-approve
     displayName: 'Terraform Apply'
 
