@@ -10,20 +10,14 @@ steps:
   - task: TerraformInstaller@0
     inputs:
       terraformVersion: '1.5.0'
-  - task: Bash@3
+
+
+  - task: AWSCLI@1
     inputs:
-      targetType: 'inline'
-      script: |
-        # Write your commands here
-        
-        echo 'Hello world'
-        aws configure
-  - task: AwsCLI@1
-    inputs:
-      awsServiceEndpoint: 'AWS_Service_Connection'  # Use the service connection name you created
-      regionName: 'us-east-1'  # Specify your AWS region
+      awsCredentials: 'AWSServiceConnection'
+      regionName: 'us-east-1'
       awsCommand: 's3'
-      awsSubcommand: 'ls'
+      awsSubCommand: 'ls'
 
   - script: terraform init
     displayName: 'Terraform Init'
