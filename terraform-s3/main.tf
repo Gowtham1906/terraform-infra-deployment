@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-infra-bucket-050924"
+  bucket = "my-infra-bucket-190924"
 
   tags = {
     Name        = "MyInfraBucket"
